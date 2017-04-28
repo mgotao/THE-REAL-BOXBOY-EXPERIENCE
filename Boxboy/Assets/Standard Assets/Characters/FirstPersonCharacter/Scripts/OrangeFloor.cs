@@ -19,15 +19,16 @@ public class OrangeFloor : MonoBehaviour {
     {
         if (dood.tag == "Player")
         {
-            player.GetComponent<FirstPersonController>().m_Jump = true;
-          //  player.GetComponent<FirstPersonController>().m_MoveDir.y
-          //      = player.GetComponent<FirstPersonController>().m_JumpSpeed;
-            player.GetComponent<FirstPersonController>().m_JumpSpeed *= 2;
+            player.GetComponent<Rigidbody>().mass -= 2;
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce *= 2;
+            player.GetComponent<RigidbodyFirstPersonController>().m_Jump = true;
+            
         }
     }
 
     void OnTriggerExit()
     {
-        player.GetComponent<FirstPersonController>().m_JumpSpeed /= 2;
+        player.GetComponent<Rigidbody>().mass += 2;
+        player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce /= 2;
     }
 }

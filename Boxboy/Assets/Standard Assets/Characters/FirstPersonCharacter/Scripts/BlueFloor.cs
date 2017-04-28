@@ -19,13 +19,12 @@ public class BlueFloor : MonoBehaviour {
     {
         if (dood.tag == "Player")
         {
-            player.GetComponent<FirstPersonController>().m_WalkSpeed *= 2;
-            print("it works!");
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed += 30;
         }
     }
 
     void OnTriggerExit()
     {
-        player.GetComponent<FirstPersonController>().m_WalkSpeed /= 2;
+        player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed -= 30;
     }
 }
