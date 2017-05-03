@@ -5,9 +5,11 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class BlueFloor : MonoBehaviour {
     public GameObject player;
+    float checkSpeed;
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        checkSpeed = player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed;
     }
 	
 	// Update is called once per frame
@@ -19,12 +21,17 @@ public class BlueFloor : MonoBehaviour {
     {
         if (dood.tag == "Player")
         {
-            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed += 30;
+            checkSpeed += 10;
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed = checkSpeed;
         }
     }
 
     void OnTriggerExit()
     {
-        player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed -= 30;
+        if (checkSpeed > 8)
+        {
+            checkSpeed -= 10;
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed = checkSpeed;
+        }
     }
 }

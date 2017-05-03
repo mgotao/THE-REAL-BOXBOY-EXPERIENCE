@@ -5,9 +5,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class OrangeFloor : MonoBehaviour {
     public GameObject player;
+    float checkJump, checkMass;
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        checkMass = player.GetComponent<Rigidbody>().mass;
+        checkJump = player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce;
     }
 	
 	// Update is called once per frame
@@ -19,8 +22,10 @@ public class OrangeFloor : MonoBehaviour {
     {
         if (dood.tag == "Player")
         {
-            player.GetComponent<Rigidbody>().mass -= 2;
-            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce *= 2;
+            checkMass -= 2;
+            player.GetComponent<Rigidbody>().mass = checkMass;
+            checkJump *= 2;
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce = checkJump;
             player.GetComponent<RigidbodyFirstPersonController>().m_Jump = true;
             
         }
@@ -28,7 +33,15 @@ public class OrangeFloor : MonoBehaviour {
 
     void OnTriggerExit()
     {
-        player.GetComponent<Rigidbody>().mass += 2;
-        player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce /= 2;
+        if (checkMass < 10)
+        {
+            checkMass += 2;
+            player.GetComponent<Rigidbody>().mass = checkMass;
+        }
+        if (checkJump > 80)
+        {
+            checkJump /= 2;
+            player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce = checkJump;
+        }
     }
 }
