@@ -29,7 +29,7 @@ public class FastFloor : MonoBehaviour {
             }
             if (checkSpeed <= 6)
             {
-                checkSpeed += 12;
+                checkSpeed += 8;
                 player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed = checkSpeed;
             }
         }
@@ -42,9 +42,9 @@ public class FastFloor : MonoBehaviour {
             checkMass += 2;
             player.GetComponent<Rigidbody>().mass = checkMass;
         }
-        if (checkSpeed >= 18)
+        if (checkSpeed >= 14)
         {
-            checkSpeed -= 12;
+            checkSpeed -= 8;
             player.GetComponent<RigidbodyFirstPersonController>().movementSettings.ForwardSpeed = checkSpeed;
         }
     }

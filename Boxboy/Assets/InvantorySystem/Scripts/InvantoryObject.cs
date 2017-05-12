@@ -19,7 +19,9 @@ This is adapted from: http://wiki.unity3d.com/index.php?title=CreateScriptableOb
 */
 
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class InvantoryObject : ScriptableObject
 {
