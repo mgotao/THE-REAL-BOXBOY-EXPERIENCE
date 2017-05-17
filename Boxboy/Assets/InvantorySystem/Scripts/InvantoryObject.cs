@@ -19,17 +19,11 @@ This is adapted from: http://wiki.unity3d.com/index.php?title=CreateScriptableOb
 */
 
 using UnityEngine;
-using UnityEditor;
-
+// Create Asset Menu only for >= Unity 5.1 
+[CreateAssetMenu(menuName = "Invantory Object")]
 public class InvantoryObject : ScriptableObject
 {
-    [MenuItem("Assets/Create/Invantory Object")]
-    public static InvantoryObject CreateAsset()
-    {
-        InvantoryObject io = ScriptableObjectUtility.CreateAsset<InvantoryObject>();
-        io.itemLogic.name = io.name;
-        return io;
-    }
+    
 
     public GameObject objectPrefab;
     public Sprite objectImage;

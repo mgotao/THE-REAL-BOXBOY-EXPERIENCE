@@ -22,6 +22,7 @@ public class CollectableObject : MonoBehaviour
     public int quantity = 0;
     public InvantoryObject objectRefrence;
     private bool justSpawned = false;
+    private bool canPickUp = false;
 
     void Start()
     {
@@ -29,12 +30,20 @@ public class CollectableObject : MonoBehaviour
         StartCoroutine(SpawnSleepTimer());
     }
 
+    void Update()
+    {
+        if (canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Invantory>().AddItemToInvanntory(this);
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"  && !justSpawned)
+        if (other.tag == "Player" && !justSpawned)
         {
-            other.GetComponent<Invantory>().AddItemToInvanntory(this);
-            Destroy(gameObject);
+            canPickUp = true;
         }
     }
 
@@ -42,9 +51,15 @@ public class CollectableObject : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            canPickUp = false;
             justSpawned = false;
             StopCoroutine(SpawnSleepTimer());
         }
+    }
+
+    void OnGUI()
+    {
+        if (canPickUp) GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 25, 200, 200), "Press E to pick up.");
     }
 
     IEnumerator SpawnSleepTimer()

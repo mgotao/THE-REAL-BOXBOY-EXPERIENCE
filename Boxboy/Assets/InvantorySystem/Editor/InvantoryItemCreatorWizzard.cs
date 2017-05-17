@@ -26,7 +26,7 @@ public class InvantoryItemCreatorWizzard : ScriptableWizard
     public InvantoryItemLogic itemLogic = new InvantoryItemLogic();
     public string objectTooltip;
 
-    [MenuItem("Freddie Babord/Invantory System/Create New Invantory Asset")]
+    [MenuItem("Tools/Freddie Babord/Invantory System/Create New Invantory Asset")]
     static void CreateWindow()
     {
         // Creates the wizard for display
@@ -51,7 +51,7 @@ public class InvantoryItemCreatorWizzard : ScriptableWizard
 
     void OnWizardCreate()
     {
-        InvantoryObject io = InvantoryObject.CreateAsset();
+        InvantoryObject io = ScriptableObjectClasses.CreateInvantoryAsset();
         io.objectImage = objectImage;
         io.objectTooltip = objectTooltip;
         objectToPrefab.name = itemLogic.name;
