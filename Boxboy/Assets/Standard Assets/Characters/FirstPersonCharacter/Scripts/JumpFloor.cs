@@ -24,12 +24,12 @@ public class JumpFloor : MonoBehaviour {
         {
             if (checkMass >= 10)
             {
-                checkMass -= 2;
+                checkMass -= 3;
                 player.GetComponent<Rigidbody>().mass = checkMass;
             }
             if (checkJump <= 80)
             {
-                checkJump += 20;
+                checkJump += 30;
                 player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce = checkJump;
             }
             player.GetComponent<RigidbodyFirstPersonController>().m_Jump = true;
@@ -39,14 +39,14 @@ public class JumpFloor : MonoBehaviour {
 
     void OnTriggerExit()
     {
-        if (checkMass <= 8)
+        if (checkMass <= 7)
         {
-            checkMass += 2;
+            checkMass += 3;
             player.GetComponent<Rigidbody>().mass = checkMass;
         }
-        if (checkJump >= 100)
+        if (checkJump >= 110)
         {
-            checkJump -= 20;
+            checkJump -= 30;
             player.GetComponent<RigidbodyFirstPersonController>().movementSettings.JumpForce = checkJump;
         }
     }

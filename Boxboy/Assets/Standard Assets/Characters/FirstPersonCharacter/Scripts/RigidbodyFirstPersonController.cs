@@ -44,6 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					//handled last as if strafing and moving forward at the same time forwards speed should take precedence
 					CurrentTargetSpeed = ForwardSpeed;
 				}
+
+                //if (input.x == 0 && input.y == 0) CurrentTargetSpeed = 0;
 #if !MOBILE_INPUT
 	            if (Input.GetKey(RunKey))
 	            {
@@ -89,7 +91,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
-        public bool m_Jump;
+        public bool m_Jump, m_Stomp;
 
         public Vector3 Velocity
         {
@@ -134,6 +136,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
+                m_Stomp = false;
+            }
+
+            if(m_Jumping)
+            {
+                if (!m_Stomp && Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    m_RigidBody.velocity = new Vector3(0f, 0f, 0f);
+                    m_RigidBody.AddForce(new Vector3(0f, -movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                    m_Stomp = true;
+                }
             }
         }
 
@@ -215,8 +228,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             
             Vector2 input = new Vector2
                 {
-                    x = CrossPlatformInputManager.GetAxis("Horizontal"),
-                    y = CrossPlatformInputManager.GetAxis("Vertical")
+                    x = CrossPlatformInputManager.GetAxisRaw("Horizontal"),
+                    y = CrossPlatformInputManager.GetAxisRaw("Vertical")
                 };
 			movementSettings.UpdateDesiredTargetSpeed(input);
             return input;
