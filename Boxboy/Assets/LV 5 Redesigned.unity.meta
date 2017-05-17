@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+fileFormatVersion: 2
+guid: 4ee7663547753ac4496566f3bf4329cb
+timeCreated: 1492134082
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 fileFormatVersion: 2
 guid: 9f04139eee3b9d04296b7fce0166d418
 timeCreated: 1492134082
@@ -6,3 +16,4 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>> 55eb261c1615515bb9c9eda5d3e30565e422d8aa
